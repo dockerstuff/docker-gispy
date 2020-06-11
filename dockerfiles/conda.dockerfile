@@ -10,7 +10,7 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update \
 RUN conda config --env --add channels conda-forge \
     && conda install -y ipython \
                         fiona \
-                        gdal
+                        gdal \
                         geopandas \
                         matplotlib \
                         numpy \
