@@ -7,7 +7,8 @@ RUN DEBIAN_FRONTEND='noninteractive' apt-get update \
                           vim \
     && rm -rf /var/lib/apt/lists/*
 
-RUN conda config --env --add channels conda-forge \
+RUN conda update -n base -c defaults -y conda \
+    && conda config --env --add channels conda-forge \
     && conda install -y ipython \
                         fiona \
                         gdal \
@@ -17,4 +18,5 @@ RUN conda config --env --add channels conda-forge \
                         pyproj \
                         rasterio \
                         scipy \
-                        shapely
+                        shapely \
+    && conda clean --all 
