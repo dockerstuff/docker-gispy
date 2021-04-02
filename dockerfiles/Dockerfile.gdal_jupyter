@@ -10,12 +10,15 @@ RUN npm install -g configurable-http-proxy
 
 RUN python3 -m pip --no-cache-dir install jupyterlab jupyterhub
 
-RUN useradd -m -d /home/user user &&\
-    echo "user:123456" | chpasswd
+RUN useradd -m -d /home/user -s /bin/bash user \
+    && su - user -c 'ln -s /mnt/data /home/user/data' \
+    && echo "user:123456" | chpasswd
 
 RUN python3 -m pip install oauthenticator
 
 ADD ./jupyterhub.conf.d /jupyterhub.conf.d
+
+VOLUME /mnt/data
 
 EXPOSE 8000
 
