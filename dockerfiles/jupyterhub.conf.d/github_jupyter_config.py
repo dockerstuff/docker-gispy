@@ -7,6 +7,11 @@ c.Spawner.cmd = ['jupyter-labhub']
 
 if 'GITHUB_CLIENT_ID' in os.environ:
     assert 'GITHUB_CLIENT_SECRET' in os.environ
+    try:
+        server_url = os.environ['SERVER_URL']
+    except:
+        server_url = 'http://localhost:8000'
+    server_url = server_url.rstrip('/')
 
     c.JupyterHub.authenticator_class = LocalGitHubOAuthenticator
     
@@ -20,5 +25,5 @@ if 'GITHUB_CLIENT_ID' in os.environ:
     
     c.LocalGitHubOAuthenticator.client_id = os.environ['GITHUB_CLIENT_ID']
     c.LocalGitHubOAuthenticator.client_secret = os.environ['GITHUB_CLIENT_SECRET']
-    c.LocalGitHubOAuthenticator.oauth_callback_url = 'http://localhost:8000/hub/oauth_callback'
+    c.LocalGitHubOAuthenticator.oauth_callback_url = f'{server_url}/hub/oauth_callback'
 
