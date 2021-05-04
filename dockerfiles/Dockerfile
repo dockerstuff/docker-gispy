@@ -1,4 +1,4 @@
-FROM osgeo/gdal
+FROM osgeo/gdal:3.2.0
 
 MAINTAINER "Carlos H Brandt <carloshenriquebrandt.gmail>"
 
