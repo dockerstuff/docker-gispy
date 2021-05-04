@@ -1,15 +1,42 @@
 # GIS-Python tools
 
-Containers for GIS processing with Python.
+Docker images for GIS processing with Python.
 
+All containers here extend the one provided by OSGeo with GDAL installed,
+[osgeo/gdal](https://hub.docker.com/r/osgeo/gdal).
 
 ### Dockerfiles
-You'll find a set of dockerfiles inside the [dockerfiles](dockerfiles/) directory,
-all providing some sort of geo-processing tools.
-All of them with GDAL and Python installed:
+Inside [dockerfiles/](dockerfiles/) directory you'll find a set of dockerfiles
+providing GDAL + Python-3 geo-processing/data-analysis tools/libraries.
 
-* `Dockerfile.gdal` : GDAL + everyday Python libs (shapely, fiona, geopandas, etc)
-* `Dockerfile.gdal_jupyter`: `Dockerfile.gdal` + Jupyter-LabHub
+For instance, two Docker image/files are provided:
+- [ipython-gdal](dockerfiles/Dockerfile)
+  * add the following Python-3 libraries and dependencies
+    * ipython + pip
+    * fiona
+    * geopandas
+    * shapely
+    * scipy/numpy/matplotlib/etc
+- [jupyterhub-gdal](dockerfiles/Dockerfile.jupyterhub)
+  * inherit _FROM_ gispy:gdal
+  * add JupyterHub
+    > default user:
+    > * user
+    > * 123456
+
+## Docker images
+Images built from [dockerfiles](#-dockerfiles) here defined are available
+in the DockerHub under `chbrandt/gispy` (https://hub.docker.com/r/chbrandt/gispy).
+
+Especifically, the following tags are associated to dockerfiles in here:
+
+- [ipython-gdal](dockerfiles/Dockerfile)
+  * `chbrandt/gispy:gdal-3.2.0`
+  * `chbrandt/gispy:gdal`
+  * `chbrandt/gispy:latest`
+
+- [jupyterhub-gdal](dockerfiles/Dockerfile.jupyterhub)
+  * `chbrandt/gispy:jupyterhub`
 
 
 #### Basic container
