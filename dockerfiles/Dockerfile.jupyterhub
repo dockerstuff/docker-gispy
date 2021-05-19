@@ -16,6 +16,8 @@ RUN useradd -m -d /home/user -s /bin/bash user \
 
 RUN python3 -m pip install oauthenticator
 
+# RUN [ which pip ] || update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+
 ADD ./jupyterhub.conf.d /jupyterhub.conf.d
 
 VOLUME /mnt/data
