@@ -1,0 +1,20 @@
+FROM chbrandt/gispy:gdal
+
+MAINTAINER "Carlos H Brandt <carloshenriquebrandt.gmail>"
+
+# Workaround for bug related to setuptools/pip-20.0
+# * https://github.com/pypa/pip/issues/7620
+RUN python3 -m pip install -U "pip!=20.0" setuptools
+
+RUN python3 -m pip --no-cache-dir install jupyterlab
+
+RUN useradd -m -d /home/user -s /bin/bash user \
+    && echo "user:123456" | chpasswd
+
+USER user
+
+EXPOSE 8000
+
+COPY jupyterhub_config.py ./
+
+CMD jupyter-lab -f jupyterhub_config --no-browser --port 8000 --ip 0.0.0.0
